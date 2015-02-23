@@ -1,0 +1,26 @@
+{
+  "name": "angular-promise-button",
+  "version": "0.1.0",
+  "description": "Angular button directive for deferred actions.",
+  "main": "dist/angular-promise-button.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erpheus/angular-promise-button.git"
+  },
+  "keywords": [
+    "angularjs",
+    "button",
+    "deferred",
+    "promise",
+    "status"
+  ],
+  "author": "Erpheus (Guillermo Guridi)",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/erpheus/angular-promise-button/issues"
+  },
+  "homepage": "https://github.com/erpheus/angular-promise-button"
+}

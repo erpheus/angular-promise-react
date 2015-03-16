@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/erpheus/angular-promise-button/issues"
   },
-  "homepage": "https://github.com/erpheus/angular-promise-button"
+  "homepage": "https://github.com/erpheus/angular-promise-button",
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "jasmine-core": "^2.2.0",
+    "karma": "^0.12.31",
+    "karma-jasmine": "^0.3.5"
+  }
 }

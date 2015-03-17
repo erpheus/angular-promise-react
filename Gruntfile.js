@@ -5,6 +5,7 @@ var config = {
 	src: 'src',
 	dist: 'dist',
 	demo: 'demo',
+	tmp: 'tmp',
 	prefix: 'promise-button'
 }
 
@@ -15,17 +16,30 @@ module.exports = function (grunt) {
 		config: config,
 		pkg: config.pkg,
 		bower: grunt.file.readJSON('./.bowerrc'),
+
 		clean: {
 			dist: ['<%= config.dist %>'],
-			demo: ['<%= config.demo %>/<%= config.pkg.name %>']
+			demo: ['<%= config.demo %>/<%= config.pkg.name %>'],
+			tmp: ['<%= config.tmp %>']
 		},
+
 		copy: {
-			dist: {
+			tmp: {
 				files: [
 					{
 						expand: true,
 						cwd: '<%= config.src %>',
-						src: '*.js',
+						src: ['*.js','*.tpl.html'],
+						dest: '<%= config.tmp %>'
+					}
+				]
+			},
+			dist: {
+				files: [
+					{
+						expand: true,
+						cwd: '<%= config.tmp %>',
+						src: ['<%= pkg.name %>.js', '<%= pkg.name %>.min.js'],
 						dest: '<%= config.dist %>'
 					}
 				]
@@ -34,9 +48,9 @@ module.exports = function (grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: '<%= config.dist %>',
-						src: '**',
-						dest: '<%= config.demo %>/<%= config.pkg.name %>'
+						cwd: '<%= config.dist %>/',
+						src: '<%= pkg.name %>.js',
+						dest: '<%= config.demo %>/<%= pkg.name %>'
 					}
 				]
 			},
@@ -52,13 +66,32 @@ module.exports = function (grunt) {
 			}
 
 		},
+
+		concat: {
+			tmp: {
+				src: '<%= config.tmp %>/**/*.js',
+      			dest: '<%= config.tmp %>/<%= pkg.name %>.js'
+			}
+		},
+
+		uglify: {
+			options: {
+				banner: '/*! <%= pkg.name %> v<%= pkg.version %> */;',
+				preserveComments: false
+			},
+			tmp: {
+				src: '<%= config.tmp %>/<%= pkg.name %>.js',
+				dest: '<%= config.tmp %>/<%= pkg.name %>.min.js'
+			},
+		},
 		html2js: {
 			options: {
-				// custom options, see below
+				module: 'promise-button-templates',
+				base: 'tmp'
 			},
-			dist: {
-				src: ['<%= config.src %>/**/*.tpl.html'],
-				dest: 'dist/<%= config.prefix %>-templates.js'
+			tmp: {
+				src: ['<%= config.tmp %>/**/*.tpl.html'],
+				dest: '<%= config.tmp %>/<%= config.prefix %>-templates.js'
 			}
 		}
 	});
@@ -66,6 +99,8 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-html2js');
 
 
@@ -73,9 +108,14 @@ module.exports = function (grunt) {
 		'dist','demo'
 	]);
 	grunt.registerTask('dist', [
+		'clean:tmp',
+		'copy:tmp',
+		'html2js:tmp',
+		'concat:tmp',
+		'uglify:tmp',
 		'clean:dist',
 		'copy:dist',
-		'html2js:dist'
+		'clean:tmp'
 	]);
 	grunt.registerTask('demo', [
 		'dist',

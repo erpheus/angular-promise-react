@@ -4,3 +4,5 @@ node_js:
 before_script:
   - bower install
   - npm install -g karma-cli
+notifications:
+  email: false

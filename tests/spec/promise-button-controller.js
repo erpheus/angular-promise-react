@@ -1,5 +1,13 @@
 describe('Controller: PromiseButtonController', function () {
 
+	var STATES = {
+		IDLE: 'idle',
+		DONE: 'done',
+		LOADING: 'loading',
+		FAILED: 'failed',
+		INTERMEDIATE: 'intermediate'
+	}
+
 	beforeEach(module('promise-button-controller'));
 
 	var buttonController,
@@ -23,7 +31,7 @@ describe('Controller: PromiseButtonController', function () {
 
 
 	it('should set status to idle', function () {
-		expect(scope.status).toBe('idle');
+		expect(scope.status).toBe( STATES.IDLE );
 	});
 
 	describe('$scope.startAction', function() {
@@ -50,7 +58,7 @@ describe('Controller: PromiseButtonController', function () {
 		});
 
 		it('should set the status to loading', function() {
-			expect(scope.status).toBe('loading');
+			expect(scope.status).toBe( STATES.LOADING );
 		});
 
 
@@ -64,7 +72,7 @@ describe('Controller: PromiseButtonController', function () {
 			}));
 
 			it('should set status to intermediate when updating', function() {
-				expect(scope.status).toBe('intermediate');
+				expect(scope.status).toBe( STATES.INTERMEDIATE );
 			});
 
 			it('should propagate notified value when updating', function() {
@@ -82,7 +90,7 @@ describe('Controller: PromiseButtonController', function () {
 			}));
 
 			it('should set status to done', function() {
-				expect(scope.status).toBe('done');
+				expect(scope.status).toBe( STATES.DONE );
 			});
 
 			it('should propagate the result', function() {
@@ -91,7 +99,7 @@ describe('Controller: PromiseButtonController', function () {
 
 			it('should go back to idle after a timeout', inject(function($timeout) {
 				$timeout.flush();
-				expect(scope.status).toBe('idle');
+				expect(scope.status).toBe( STATES.IDLE );
 			}));
 
 		});
@@ -107,7 +115,7 @@ describe('Controller: PromiseButtonController', function () {
 			}));
 
 			it('should set status to failed', function() {
-				expect(scope.status).toBe('failed');
+				expect(scope.status).toBe( STATES.FAILED );
 			});
 
 			it('should propagate the reason', function() {
@@ -116,7 +124,7 @@ describe('Controller: PromiseButtonController', function () {
 
 			it('should go back to idle after a timeout', inject(function($timeout) {
 				$timeout.flush();
-				expect(scope.status).toBe('idle');
+				expect(scope.status).toBe( STATES.IDLE );
 			}));
 
 		});

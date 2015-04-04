@@ -11,6 +11,8 @@ module.exports = function(config) {
       'tests/**/*.js'
     ],
 
+    plugins: ['karma-jasmine','karma-jasmine-html-reporter','karma-phantomjs-launcher'],
+
     reporters: ['html']
   });
 };

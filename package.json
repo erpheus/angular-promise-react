@@ -4,7 +4,7 @@
   "description": "Angular button directive for deferred actions.",
   "main": "dist/angular-promise-button.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",
     "karma-jasmine": "^0.2.2",
-    "karma-jasmine-html-reporter": "^0.1.7"
+    "karma-jasmine-html-reporter": "^0.1.7",
+    "karma-phantomjs-launcher": "^0.1.4"
   }
 }

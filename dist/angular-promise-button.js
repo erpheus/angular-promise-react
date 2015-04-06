@@ -1,6 +1,26 @@
 (function(){
 	
-	var module = angular.module('promise-button-controller',[]);
+	var module = angular.module('promise-button',['promise-button-templates']);
+
+})();
+(function(){
+	
+	var module = angular.module('promise-button');
+
+	module.directive('promiseDefault', function(){
+		return {
+			scope: false,
+			restrict: 'E',
+			templateUrl: 'directives/promise-default.tpl.html',
+			transclude: true
+		};
+	});
+
+
+})();
+(function(){
+	
+	var module = angular.module('promise-button');
 
 	module.controller('PromiseButtonController', ['$scope','$timeout', function($scope,$timeout){
 		
@@ -32,7 +52,7 @@
 })();
 (function(){
 	
-	var module = angular.module('promise-button-directive',['promise-button-controller','promise-button-templates']);
+	var module = angular.module('promise-button');
 
 	module.directive('promiseButton', ['$compile', function($compile){
 		return {
@@ -51,13 +71,18 @@
 	}]);
 
 })();
-angular.module('promise-button-templates', ['promise-button.tpl.html']);
+angular.module('promise-button-templates', ['directives/promise-default.tpl.html', 'promise-button.tpl.html']);
+
+angular.module("directives/promise-default.tpl.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("directives/promise-default.tpl.html",
+    "<span ng-transclude ng-switch-default></span>\n" +
+    "<i class=\"fa fa-circle-o-notch icon-spin\" ng-switch-when=\"loading\"></i>\n" +
+    "<i class=\"fa fa-check\" ng-switch-when=\"done\"></i>");
+}]);
 
 angular.module("promise-button.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("promise-button.tpl.html",
     "<ng-switch on=\"status\">\n" +
-    "	<span ng-switch-default ng-transclude></span>\n" +
-    "	<i class=\"fa fa-circle-o-notch icon-spin\" ng-switch-when=\"loading\"></i>\n" +
-    "	<i class=\"fa fa-check\" ng-switch-when=\"done\"></i>\n" +
+    "	<ng-transclude></ng-transclude>\n" +
     "</ng-switch>");
 }]);

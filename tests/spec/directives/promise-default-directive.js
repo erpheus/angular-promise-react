@@ -7,7 +7,7 @@ describe('Directive: promise-default', function() {
 
 
 
-  beforeEach(module('promise-button-default-directive'));
+  beforeEach(module('promise-button'));
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();

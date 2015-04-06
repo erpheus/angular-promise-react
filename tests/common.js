@@ -8,7 +8,7 @@ var STATES = {
 
 
 function mockDirective(name){
-		angular.module('promise-button-default-directive').config(function($provide){
+		angular.module('promise-button').config(function($provide){
 	    	$provide.decorator(name+'Directive', ['$delegate', function($delegate) {
 	        	//$delegate is array of all ng-click directive
 	        	//in this case first one is angular buildin ng-click
@@ -17,7 +17,7 @@ function mockDirective(name){
 	        	return $delegate;
 	    	}]);
 		});
-		angular.module('promise-button-default-directive').directive(name, function() {
+		angular.module('promise-button').directive(name, function() {
 		    return {
 		        link: function() {}
 		    }

@@ -1,6 +1,6 @@
 (function(){
 	
-	var module = angular.module('promise-button-default-directive',['promise-button-templates']);
+	var module = angular.module('promise-button');
 
 	module.directive('promiseDefault', function(){
 		return {

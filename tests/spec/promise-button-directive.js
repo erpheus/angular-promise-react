@@ -7,11 +7,11 @@ describe('Directive: promise-button', function() {
 
   var SAMPLETEXT="lalalalalalala";
 
-  beforeEach(module('promise-button-directive'));
+  beforeEach(module('promise-button'));
 
   beforeEach(function(){
     startAction = jasmine.createSpy('startAction');
-    module('promise-button-directive', function($controllerProvider){
+    module('promise-button', function($controllerProvider){
       $controllerProvider.register('PromiseButtonController', function($scope){
         $scope.startAction = startAction;
       });

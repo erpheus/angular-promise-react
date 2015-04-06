@@ -1,6 +1,6 @@
 (function(){
 	
-	var module = angular.module('promise-button-controller',[]);
+	var module = angular.module('promise-button');
 
 	module.controller('PromiseButtonController', ['$scope','$timeout', function($scope,$timeout){
 		

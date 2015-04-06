@@ -79,7 +79,7 @@ module.exports = function (grunt) {
 
 		concat: {
 			tmp: {
-				src: '<%= config.tmp %>/**/*.js',
+				src: ['<%= config.tmp %>/<%= config.prefix %>.js','<%= config.tmp %>/**/*.js'],
       			dest: '<%= config.tmp %>/<%= pkg.name %>.js'
 			}
 		},

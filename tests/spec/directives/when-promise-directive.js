@@ -9,7 +9,6 @@ describe('Directive: when-promise', function() {
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
-    scope.deferred = function(){}
 
     element = angular.element('<fake-parent><span when-promise="aaaa"></span></fake-parent>');
 

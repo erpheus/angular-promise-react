@@ -1,5 +1,3 @@
 <ng-switch on="status">
-	<span ng-switch-default ng-transclude></span>
-	<i class="fa fa-circle-o-notch icon-spin" ng-switch-when="loading"></i>
-	<i class="fa fa-check" ng-switch-when="done"></i>
+	<ng-transclude></ng-transclude>
 </ng-switch>

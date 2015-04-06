@@ -8,7 +8,9 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'src/*.js',
       'src/**/*.js',
-      'tests/**/*.js'
+      'tmp/promise-button-templates.js',
+      'tests/common.js',
+      'tests/spec/**/*.js'
     ],
 
     plugins: ['karma-jasmine','karma-jasmine-html-reporter','karma-phantomjs-launcher'],

@@ -1,13 +1,5 @@
 describe('Controller: PromiseButtonController', function () {
 
-	var STATES = {
-		IDLE: 'idle',
-		DONE: 'done',
-		LOADING: 'loading',
-		FAILED: 'failed',
-		INTERMEDIATE: 'intermediate'
-	}
-
 	beforeEach(module('promise-button-controller'));
 
 	var buttonController,

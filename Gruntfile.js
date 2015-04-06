@@ -29,7 +29,17 @@ module.exports = function (grunt) {
 					{
 						expand: true,
 						cwd: '<%= config.src %>',
-						src: ['*.js','*.tpl.html'],
+						src: ['**/*.js','**/*.tpl.html'],
+						dest: '<%= config.tmp %>'
+					}
+				]
+			},
+			templates: {
+				files: [
+					{
+						expand: true,
+						cwd: '<%= config.src %>',
+						src: ['**/*.tpl.html'],
 						dest: '<%= config.tmp %>'
 					}
 				]
@@ -122,6 +132,10 @@ module.exports = function (grunt) {
 		'clean:demo',
 		'copy:demo-libraries',
 		'copy:demo-dist'
+	]);
+	grunt.registerTask('templates', [
+		'copy:templates',
+		'html2js:tmp'
 	]);
 
 };

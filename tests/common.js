@@ -11,8 +11,6 @@ function mockDirective(name, backups){
 	angular.module('promise-button').config(function($provide){
     	$provide.decorator(name+'Directive', ['$delegate', function($delegate) {
         	//$delegate is array of all {name} directive
-        	//in this case first one is angular buildin ng-click
-        	//so we remove it.
         	backups[name] = $delegate.shift();
         	return $delegate;
     	}]);
@@ -28,8 +26,6 @@ function restoreDirective(name, backups){
 	angular.module('promise-button').config(function($provide){
     	$provide.decorator(name+'Directive', ['$delegate', function($delegate) {
         	//$delegate is array of all {name} directive
-        	//in this case first one is angular buildin ng-click
-        	//so we remove it.
         	$delegate.pop();
         	$delegate.unshift(backups[name]);
         	return $delegate;

@@ -1,39 +1,60 @@
 describe('Directive: when-promise', function() {
-  var element,
-  	  scope,
-      trigger = '',
+  var scope,
       action,
-      startAction;
+      startAction,
+      SAMPLECONTENT = "contentcontent";
 
   beforeEach(module('promise-button'));
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
+    scope.status = STATES.IDLE;
 
-    element = angular.element('<fake-parent><span when-promise="aaaa"></span></fake-parent>');
+    parent = angular.element('<fake-parent><span when-promise="'+STATES.LOADING+'">'+SAMPLECONTENT+'</span></fake-parent>');
+    parent.data('$promiseButtonController', {});
 
-    element.data('$PromiseButtonController', {});
-
-    var parent = $compile(element)(scope);
+    parent = $compile(parent)(scope);
     scope.$digest();
-    element = angular.element(parent.children()[0]);
   }));
 
-  it ('should replace itself with an equivalent ng-switch-when', function(){
-    expect(element.attr('when-promise')).toBeUndefined();
-    expect(element.attr('ng-switch-when')).toBe('aaaa');
+  it ('should not show its content when current status doesn\'t match its value', function(){
+    expect(parent.text()).not.toMatch(SAMPLECONTENT);
   });
 
-  it ('should replace itself with a ng-switch-default if value is idle', inject(function($compile){
-    // setup
-    element = angular.element('<fake-parent><span when-promise="idle"></span></fake-parent>');
-    var parent = $compile(element)(scope);
+  it ('should show its content when current status matches its value', function(){
+    scope.status = STATES.LOADING;
     scope.$digest();
-    element = angular.element(parent.children()[0]);
 
-    expect(element.attr('when-promise')).toBeUndefined();
-    expect(element.attr('ng-switch-default')).toBeDefined();
+    expect(parent.text()).toMatch(SAMPLECONTENT);
+  });
 
-  }));
+
+  describe('with no value specified', function(){
+
+    beforeEach(inject(function($compile){
+      parent = angular.element('<fake-parent><span when-promise>'+SAMPLECONTENT+'</span></fake-parent>');
+      parent.data('$promiseButtonController', {});
+
+      parent = $compile(parent)(scope);
+      scope.$digest();
+    }));
+
+    it ('should show its content if status is not idle', function(){
+      scope.status = STATES.LOADING;
+      scope.$digest();
+
+      expect(parent.text()).toMatch(SAMPLECONTENT);
+
+      scope.status = STATES.DONE;
+      scope.$digest();
+
+      expect(parent.text()).toMatch(SAMPLECONTENT);
+    });
+
+    it ('should not show its content if status is idle', function(){
+      expect(parent.text()).not.toMatch(SAMPLECONTENT);
+    });
+
+  });
 
 });

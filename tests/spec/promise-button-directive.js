@@ -42,7 +42,7 @@ describe('Directive: promise-button', function() {
   describe('with custom trigger specified', function(){
 
     beforeEach(inject(function($compile){
-      element = '<a promise-button="deferred" promise-trigger="dblclick">'+SAMPLETEXT+'</a>';
+      element = '<a promise-button="deferred" promise-trigger="dblclick"></a>';
       element = $compile(element)(scope);
       scope.$digest();
     }));

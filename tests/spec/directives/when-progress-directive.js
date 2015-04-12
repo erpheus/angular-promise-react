@@ -3,16 +3,18 @@ describe('Directive: when-progress', function() {
       trigger = '',
       action,
       startAction,
-      parent;
+      parent,
+      controller = {};
 
   beforeEach(module('promise-button'));
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
-    scope.status = STATES.IDLE;
+    controller.status = STATES.IDLE;
+    delete controller.state;
 
     parent = angular.element('<fake-parent><span when-progress>contentcontent</span></fake-parent>');
-    parent.data('$promiseButtonController', {});
+    parent.data('$promiseButtonController', controller);
 
     parent = $compile(parent)(scope);
     scope.$digest();
@@ -20,14 +22,14 @@ describe('Directive: when-progress', function() {
   }));
 
   it ('should show its content when status is loading', function(){
-    scope.status = STATES.LOADING;
+    controller.status = STATES.LOADING;
     scope.$digest();
 
     expect(parent.text()).toMatch('contentcontent');
   });
 
   it ('should show its content when status is intermediate', function(){
-    scope.status = STATES.INTERMEDIATE;
+    controller.status = STATES.INTERMEDIATE;
     scope.$digest();
 
     expect(parent.text()).toMatch('contentcontent');
@@ -36,12 +38,12 @@ describe('Directive: when-progress', function() {
   it ('should not show its content when status is idle, done or failed', function(){
     expect(parent.text()).not.toMatch('contentcontent');
 
-    scope.status = STATES.DONE;
+    controller.status = STATES.DONE;
     scope.$digest();
 
     expect(parent.text()).not.toMatch('contentcontent');
 
-    scope.status = STATES.FAILED;
+    controller.status = STATES.FAILED;
     scope.$digest();
 
     expect(parent.text()).not.toMatch('contentcontent');
@@ -52,45 +54,45 @@ describe('Directive: when-progress', function() {
     beforeEach(inject(function($compile){
 
       parent = angular.element('<fake-parent><span when-progress="\'aaaa\'">contentcontent</span></fake-parent>');
-      parent.data('$promiseButtonController', {});
+      parent.data('$promiseButtonController', controller);
       parent = $compile(parent)(scope);
       scope.$digest();
 
     }));
 
     it('should show its content when status is intermediate and state is equal to the value', function(){
-      scope.status = STATES.INTERMEDIATE;
-      scope.state = 'aaaa';
+      controller.status = STATES.INTERMEDIATE;
+      controller.state = 'aaaa';
       scope.$digest();
 
       expect(parent.text()).toMatch('contentcontent');
     });
 
     it('should not show its contents when state is not equal to the value', function(){
-      scope.status = STATES.INTERMEDIATE;
-      scope.state = 'bbbb';
+      controller.status = STATES.INTERMEDIATE;
+      controller.state = 'bbbb';
       scope.$digest();
 
       expect(parent.text()).not.toMatch('contentcontent');
     });
 
     it ('should not show its content when status is not intermediate, even if state is equal', function(){
-      scope.state = 'aaaa';
+      controller.state = 'aaaa';
       scope.$digest();
 
       expect(parent.text()).not.toMatch('contentcontent');
 
-      scope.status = STATES.LOADING;
+      controller.status = STATES.LOADING;
       scope.$digest();
 
       expect(parent.text()).not.toMatch('contentcontent');
 
-      scope.status = STATES.DONE;
+      controller.status = STATES.DONE;
       scope.$digest();
 
       expect(parent.text()).not.toMatch('contentcontent');
 
-      scope.status = STATES.FAILED;
+      controller.status = STATES.FAILED;
       scope.$digest();
 
       expect(parent.text()).not.toMatch('contentcontent');

@@ -9,7 +9,7 @@ describe('Directive: promise-button', function() {
     startAction = jasmine.createSpy('startAction');
     module('promise-button', function($controllerProvider){
       $controllerProvider.register('PromiseButtonController', function($scope){
-        $scope.startAction = startAction;
+        this.startAction = startAction;
       });
     });
   });

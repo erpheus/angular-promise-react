@@ -2,16 +2,18 @@ describe('Directive: when-promise', function() {
   var scope,
       action,
       startAction,
-      SAMPLECONTENT = "contentcontent";
+      SAMPLECONTENT = "contentcontent",
+      controller = {};
 
   beforeEach(module('promise-button'));
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
-    scope.status = STATES.IDLE;
+
+    controller.status = STATES.IDLE;
 
     parent = angular.element('<fake-parent><span when-promise="'+STATES.LOADING+'">'+SAMPLECONTENT+'</span></fake-parent>');
-    parent.data('$promiseButtonController', {});
+    parent.data('$promiseButtonController', controller);
 
     parent = $compile(parent)(scope);
     scope.$digest();
@@ -22,7 +24,7 @@ describe('Directive: when-promise', function() {
   });
 
   it ('should show its content when current status matches its value', function(){
-    scope.status = STATES.LOADING;
+    controller.status = STATES.LOADING;
     scope.$digest();
 
     expect(parent.text()).toMatch(SAMPLECONTENT);
@@ -33,19 +35,19 @@ describe('Directive: when-promise', function() {
 
     beforeEach(inject(function($compile){
       parent = angular.element('<fake-parent><span when-promise>'+SAMPLECONTENT+'</span></fake-parent>');
-      parent.data('$promiseButtonController', {});
+      parent.data('$promiseButtonController', controller);
 
       parent = $compile(parent)(scope);
       scope.$digest();
     }));
 
     it ('should show its content if status is not idle', function(){
-      scope.status = STATES.LOADING;
+      controller.status = STATES.LOADING;
       scope.$digest();
 
       expect(parent.text()).toMatch(SAMPLECONTENT);
 
-      scope.status = STATES.DONE;
+      controller.status = STATES.DONE;
       scope.$digest();
 
       expect(parent.text()).toMatch(SAMPLECONTENT);

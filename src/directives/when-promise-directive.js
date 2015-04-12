@@ -12,18 +12,18 @@
         	terminal: ngIf.terminal,
         	restrict: ngIf.restrict,
         	require: '^promiseButton',
-        	link: function(scope, element, attributes) {
+        	link: function(scope, element, attributes, promiseButtonController) {
         		var value = attributes['whenPromise'];
         		// actual condition
         		var promiseCondition;
 
         		if (value) { // If a value is specified it matches only intermediate status with proper states
         			promiseCondition = function(){
-	        			return scope.status == value;
+	        			return promiseButtonController.status == value;
 	        		}
         		} else { // If no value is specified it matches either loading or intermediate status
         			promiseCondition = function(){
-	        			return scope.status != STATES.IDLE;
+	        			return promiseButtonController.status != STATES.IDLE;
 	        		}
         		}
 

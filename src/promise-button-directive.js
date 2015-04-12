@@ -2,16 +2,17 @@
 	
 	var module = angular.module('promise-button');
 
-	module.directive('promiseButton', ['$compile', function($compile){
+	module.directive('promiseButton', ['$parse', function($parse){
 		return {
-			scope: {
-				'promiseButton': '&' 
-			},
 			controller: 'PromiseButtonController',
 			restrict: 'A',
-			link: function($scope, iElm, iAttrs, controller) {
-				var trigger = iAttrs['promiseTrigger'] || 'click';
-				iElm.bind(trigger, $scope.startAction);
+			compile: function($element, attr) {
+				var fn = $parse(attr['promiseButton'], /* interceptorFn */ null, /* expensiveChecks */ true);
+				return function(scope, element, attr, ctrl) {
+					ctrl.action = fn;
+					var trigger = attr['promiseTrigger'] || 'click';
+					element.bind(trigger, ctrl.startAction);
+				}
 			}
 		};
 	}]);

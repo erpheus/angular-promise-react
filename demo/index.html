@@ -4,18 +4,343 @@
 	<title>Angular Promise Button Demo</title>
 	<meta charset="utf-8"/> 
 
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript" src="angular.js"></script>
+	<script type="text/javascript" src="angular-promise-button/angular-promise-button.js"></script>
+
+	<script type="text/javascript" src="https://angularjs.org/google-code-prettify/prettify.min.js">
+	</script>
 
 	<script type="text/javascript" src="demo-controller.js"></script>
+	<script type="text/javascript" src="demo.js"></script>
 
-	<script type="text/javascript" src="angular-promise-button/angular-promise-button.js"></script>
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap-tpls.min.js"></script>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+
+	<link rel="stylesheet" type="text/css" href="https://angularjs.org/google-code-prettify/prettify.css">
+	<!--[if lt IE 9]>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
+	<![endif]-->
+
+	<style>
+		.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+		.nav-tabs{
+			margin-bottom: 10px;
+		}
+		.header{
+			margin-top: 30px;
+			margin-bottom: 30px;
+			background: lightblue;
+			padding-bottom: 40px;
+			padding-top: 20px;
+		}
+		.header h1{
+			font-size: 4em;
+		}
+		.btn:focus,.btn:active {
+   			outline: none !important;
+		}
+		.vcenter {
+		    display: inline-block;
+		    vertical-align: middle;
+		    float: none;
+		}
+		.row.example {
+			margin-bottom: 50px;
+		}
+		code {
+			color: #000;
+			background: none;
+		}
+	</style>
 
 </head>
 <body ng-controller="DemoController">
 
-	<p>{{hola}}</p>
+	<!-- Fork on github -->
+	<div class="github-fork-ribbon-wrapper right" >
+        <div class="github-fork-ribbon">
+            <a href="https://github.com/erpheus/angular-promise-button">Fork me on GitHub</a>
+        </div>
+    </div>
 
-	<button promise-button="wait_3_seconds()">lalala</button>
+    <!-- Title -->
+
+    <div class="header">
+    	<div class="container">
+    		<h1>Angular promise button</h1>
+    		<p>
+    			An angular library for making buttons that show the state of their call live.
+    		</p>
+    		<button promise-button="try_me()" class="btn btn-lg btn-danger">
+				<promise-default>try me!</promise-default>
+			</button>
+    	</div>
+    </div>
+
+    <!-- Installation -->
+
+    <div class="container">
+    	<h1>Installation</h1>
+    	<p>angular-promise-button can be downloaded with bower:</p>
+    	<div class="well">
+    		<code>bower install angular-promise-button --save</code>
+    	</div>
+    	<p>or you can download the latest version from github:</p>
+    	<a href="https://github.com/erpheus/angular-promise-button" class="btn btn-success"><i class="fa fa-github"></i> Latest release</a>
+
+    	<hr>
+
+    	<p>Include angular-promise-button's script tag after angularjs' one</p>
+    	<div class="well">
+    		<code>&lt;script type="text/javascript" src="angular-promise-button/angular-promise-button.js"&gt;&lt;/script&gt; </code>
+    	</div>
+
+    	<p>Inject <code>promise-button</code> directive into your angular module:</p>
+    	<div class="well">
+    		<code>angular.module('myApp', ['promise-button'])</code>
+    	</div>
+    </div>
+
+    <!-- Usage -->
+
+    <div class="container">
+
+    	<h1>Usage</h1>
+
+    	<!-- promise-button -->
+    	<h3>&lt;... promise-button="deferredCall()" &gt;</h3>
+    	<p>Use this directive as attribute of your button. It will bind to click on the specified element and will run the function spedified as value when the button is pressed. This call should return a promise for the button to behave properly.</p>
+    	<p>Makes the variables <code>status</code> and <code>state</code> available in the scope. </p>
+    	<ul>
+    		<li><code>status</code> contains the status of the button's call (detailed description below)</li>
+    		<li><code>state</code> contains the data notified through the promise (if there has been such notification)</li>
+    	</ul>
+
+    	<!-- promise-trigger -->
+    	<p style="font-size:1.3em">&lt;... promise-button="deferredCall()" <strong>promise-trigger="event"</strong> &gt;</p>
+    	<p>Add a <code>promise-trigger</code> attribute to specify a custom event the action should be binded to. Any event jQuey can bind to will work</p> 
+
+    	<!-- when-promise -->
+    	<h3>&lt;... when-promise="status"&gt;</h3>
+    	<p>Works exactly like an ngIf directive except that it will only render when the value provided matches the current button status.</p>
+    	<p>Possible statuses are:</p>
+    	<ul>
+    		<li><code>idle</code> Active when the button has not been clicked yet, or after completion and delay.</li>
+    		<br>
+    		<li><code>loading</code> Active when the action has started.</li>
+    		<li><code>intermediate</code> Active when the action has started and there have been notifications through the promise. </li>
+    		<br>
+    		<li><code>done</code> Active when the action has been resolved with success. The variable <code>state</code> will be set to the result of the promise.</li>
+    		<li><code>failed</code> Active when the action has failed. The variable <code>state</code> will be set to the reason for failure of the promise.</li>
+    	</ul>
+
+    	<p>If <code>when-promise</code> is used with no attributes it will default to match any state but <code>idle</code>.</p>
+
+    	<!-- when-progress -->
+    	<h3>&lt;... when-progress="state"&gt;</h3>
+    	<p>Similar to <code>when-promise</code> but it's value will be matched against the current state (last value notified through the promise).</p>
+
+    	<p>If <code>when-promise</code> is used with no attributes it will default to match any loading status: <code>loading</code> and <code>intermediate</code>.</p>
+
+    	<!-- promise-default -->
+    	<h3>&lt;promise-default&gt; label &lt;/promise-default&gt;</h3>
+    	<p>It will prepare a default button using some provided templates (that can be overriden in <code>app.config</code>). By default it assumes <a href="http://fontawesome.io/" >font-awesome</a> is begin used.</p>
+    	<p>Whatever is placed inside the tag will be displayed when the status is <code>idle</code>. When loading it will display two arrows spinning and a check-mark when done.</p>
+
+    </div>
+
+    <!-- Examples -->
+	<div class="container">
+		<h1>Examples</h1>
+		<p>This library has been designed with extensibility and flexibility in mind. Here you have some of the most common use cases:</p>
+
+		<h2>Simplest button</h2>
+		<p>Button built with minimum markup. It has been designed to be used with font-awesome but its fully customizable (see next example). You can only choose what should be displayed when the button is idle.</p>
+		<div class="row example">
+			<div class="col-sm-8 app-source vcenter" app-source="simple.html simple.js" clean style="clear: both;">
+			</div><!--
+
+			--><div class="col-sm-4 vcenter" style="text-align: center;">
+				<div app-run="simple-real.html" module="simple"></div>
+			</div>
+		</div>
+
+		<h2>Simplest button (customized)</h2>
+		<p>All the states of a button depend on templates that can be configured in your app.config method. This is perfect if you want all the buttons in your app to behave the same except for the title they have.</p>
+		<div class="row example">
+			<div class="col-sm-8 app-source vcenter" app-source="simple.html simple.js" clean style="clear: both;">
+			</div><!--
+
+			--><div class="col-sm-4 vcenter" style="text-align: center;">
+				<div app-run="simple-customized-real.html" module="simple-customized"></div>
+			</div>
+		</div>
+
+		<h2>Fully featured button</h2>
+		<p>Example of all the directives available being used</p>
+		<div class="row example">
+			<div class="col-sm-8 app-source vcenter" app-source="full.html full.js" clean style="clear: both;">
+			</div><!--
+
+			--><div class="col-sm-4 vcenter" style="text-align: center;">
+				<div app-run="full-real.html" module="full"></div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+
+	<div id="simple-code">
+    <!-- ============== Simple ============== -->
+
+	    <script type="text/ng-template" id="simple.html">
+	      <a promise-button="wait_3_seconds()" class="btn btn-info btn-lg">
+	        <promise-default>wait</promise-default>
+	      </a>
+	    </script>
+	    <script id="simple.js" type="text">
+	        $scope.wait_3_seconds = function(){
+	          return $timeout(function(){return 'bieeen!'}, 3000);
+	        }
+	    </script>
+	    <script type="text/ng-template" id="simple-real.html">
+	      <div ng-controller="SimpleController">
+	        <a class="btn btn-info btn-lg" promise-button="wait_3_seconds()">
+	          <promise-default>wait</promise-default>
+	        </a>
+	      </div>
+	    </script>
+	    <script id="simple-real.js">
+	      angular.module('simple',['promise-button'])
+	        .controller('SimpleController',['$scope', '$timeout',
+	          function($scope, $timeout){
+	            $scope.wait_3_seconds = function(){
+	              return $timeout(function(){return 'bieeen!'}, 3000);
+	            }
+	          }
+	        ]);
+	    </script>
+	</div>
+
+
+	<div id="simple-customized-code">
+    <!-- ============== Simple customized ============== -->
+
+	    <script type="text/ng-template" id="simple-customized.html">
+	      <a promise-button="wait_3_seconds()" class="btn btn-info btn-lg">
+	        <promise-default>wait</promise-default>
+	      </a>
+	    </script>
+	    <script id="simple-customized.js" type="text">
+	        $scope.wait_3_seconds = function(){
+	          return $timeout(function(){return 'bieeen!'}, 3000);
+	        }
+	    </script>
+	    <script type="text/ng-template" id="simple-customized-real.html">
+	      <div ng-controller="SimpleCustomController">
+	        <a class="btn btn-info btn-lg" promise-button="wait_3_seconds()">
+	          <promise-default>wait</promise-default>
+	        </a>
+	      </div>
+	    </script>
+	    <script id="simple-customized-real.js">
+	      angular.module('simple-customized',['promise-button'])
+	        .controller('SimpleCustomController',['$scope', '$timeout',
+	          function($scope, $timeout){
+	            $scope.wait_3_seconds = function(){
+	              return $timeout(function(){return 'bieeen!'}, 3000);
+	            }
+	          }
+	        ]);
+	    </script>
+	</div>
+
+
+	<div id="full-code">
+    <!-- ============== Simple customized ============== -->
+
+	    <script type="text/ng-template" id="full.html">
+	      <a promise-button="download()" class="btn btn-info btn-lg">
+	        <span when-promise="idle">Download pictures</span>
+	        <span when-promise="loading">Fetching...</span>
+	        <span when-promise="intermediate">Downloaded {{state}}/{{total}}</span>
+	        <span when-promise="done">Finished correctly</span>
+	      </a>
+	    </script>
+	    <script id="full.js" type="text">
+	        $scope.download = function(){
+	          var deferred = $q.defer();
+	          var finished = 0;
+	          var downloadImages = function(){
+	            finished += 1;
+	            deferred.notify(finished);
+	            if (finished >= $scope.total){
+	          	  deferred.resolve('done!');
+	            } else {
+		          $timeout(downloadImages, 500);
+	            }
+	          }
+	          $timeout(function(){
+	            $scope.total = 5;
+	            $timeout(downloadImages, 500);
+	          }, 1000);
+
+	          return deferred.promise;
+	        }
+	    </script>
+	    <script type="text/ng-template" id="full-real.html">
+	      <div ng-controller="FullController">
+	        <a promise-button="download()" class="btn btn-info btn-lg">
+	          <span when-promise="idle">Download pictures</span>
+	          <span when-promise="loading">Fetching...</span>
+	          <span when-promise="intermediate">Downloaded {{state}}/{{total}}</span>
+	          <span when-promise="done">Finished correctly</span>
+	        </a>
+	      </div>
+	    </script>
+	    <script id="full-real.js">
+	      angular.module('full',['promise-button'])
+	        .controller('FullController',['$scope', '$timeout','$q',
+	          function($scope, $timeout, $q){
+	            $scope.download = function(){
+	          var deferred = $q.defer();
+	          var finished = 0;
+	          var downloadImages = function(){
+	          	finished += 1;
+	          	deferred.notify(finished);
+	          	if (finished >= $scope.total){
+	          		deferred.resolve('done!');
+	          	} else {
+		          	$timeout(downloadImages, 500);
+	          	}
+	          }
+	          $timeout(function(){
+	          	$scope.total = 5;
+	          	$timeout(downloadImages, 500);
+	          }, 1000);
+
+	          return deferred.promise;
+	        }
+
+	          }
+	        ]);
+	    </script>
+	</div>
+
 
 </body>
 </html>

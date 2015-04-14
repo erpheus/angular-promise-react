@@ -1,7 +1,8 @@
 describe('Directive: promise-default', function() {
   var element,
   	  scope,
-  	  SAMPLETEXT = 'transcluded text';
+  	  SAMPLETEXT = 'transcluded text',
+      controller = {};
 
   var backups = {};
   beforeEach(function(){mockDirective.apply(this,['whenPromise', backups])});
@@ -12,42 +13,31 @@ describe('Directive: promise-default', function() {
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
 
-    element = '<promise-default>'+SAMPLETEXT+'</promise-default>';
+    controller.status = STATES.IDLE;
 
-    element = $compile(element)(scope);
+    parent = angular.element('<fake-parent><promise-default>'+SAMPLETEXT+'</promise-default></fake-parent>');
+    parent.data('$promiseButtonController', controller);
+
+    element = $compile(parent)(scope);
     scope.$digest();
   }));
 
   var states_and_checks = [
   	{ state: STATES.IDLE, check: SAMPLETEXT},
-  	{ state: STATES.LOADING, check : 'icon-spin' },
-  	{ state: STATES.INTERMEDIATE, check : 'icon-spin' },
+  	{ state: STATES.LOADING, check : 'fa-spin' },
+  	{ state: STATES.INTERMEDIATE, check : 'fa-spin' },
   	{ state: STATES.DONE, check: 'fa-check' },
   	{ state: STATES.FAILED, check: 'fa-times' }
   ];
 
-  var test_loading_state = function(state, check){ return function() {
-
-  	var resulting_elements;
-
-  	beforeEach(function(){
-  		resulting_elements = element[0].querySelectorAll('[when-promise="'+state+'"]');
-  	});
-
-  	it('should exist', function(){
-  		expect(resulting_elements.length).toBe(1);
-  	});
-
-  	it('should include '+check, function(){
-  		expect(resulting_elements[0].outerHTML).toMatch(check);
-  	});
-
-  }};
-
   for (var i = 0; i < states_and_checks.length; i++) {
-  	var sc = states_and_checks[i];
-  	describe(sc.state + ' element', test_loading_state(sc.state, sc.check));
+    var sc = states_and_checks[i];
+    it('should display '+sc.check+' on '+sc.state, function(sc){ return function(){
+      controller.status = sc.state;
+      scope.$digest();
 
+      expect(element.html()).toMatch(sc.check);
+    }}(sc));
   };
 
 });

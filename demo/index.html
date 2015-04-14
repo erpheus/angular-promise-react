@@ -82,7 +82,11 @@
     			An angular library for making buttons that show the state of their call live.
     		</p>
     		<button promise-button="try_me()" class="btn btn-lg btn-danger">
-				<promise-default>try me!</promise-default>
+    			<span when-promise="idle">try me!</span>
+				<span when-progress><i class="fa fa-refresh fa-spin"></i></span>
+				<span when-promise="loading">Initializing...</span>
+				<span when-promise="intermediate">Checking {{state}}/3</span>
+				<span when-promise="done"><i class="fa fa-check"></i> Done!!</span>
 			</button>
     	</div>
     </div>

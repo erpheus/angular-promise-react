@@ -5,10 +5,27 @@
 	app.controller('DemoController',[
 		'$scope',
 		'$timeout',
-		function($scope, $timeout){
+		'$q',
+		function($scope, $timeout, $q){
 
-			$scope.wait_3_seconds = function(){
-				return $timeout(function(){return 'bieeen!'}, 3000);
+			$scope.try_me = function(){
+				var deferred = $q.defer();
+				var count = 0;
+
+				var check = function(){
+					count += 1;
+					if (count > 3){
+						deferred.resolve(true);
+					} else {
+						deferred.notify(count);
+						$timeout(check, 1200);
+					}
+				}
+
+				$timeout(check,1200);
+
+
+				return deferred.promise;
 			}
 		}
 	]);

@@ -13,7 +13,7 @@ Install it via bower:
 	$ bower install angular-promise-button --save
 
 
-or download the [minified source](lalala) from github.
+or download the [minified source](https://github.com/erpheus/angular-promise-button/releases/latest) from github.
 
 Include angular-promise-button0s script tag after angularjs's one:
 

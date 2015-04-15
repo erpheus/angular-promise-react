@@ -1,6 +1,6 @@
 {
   "name": "angular-promise-button",
-  "version": "0.1.0",
+  "version": "0.7.0",
   "description": "Angular button directive for deferred actions.",
   "main": "dist/angular-promise-button.min.js",
   "scripts": {

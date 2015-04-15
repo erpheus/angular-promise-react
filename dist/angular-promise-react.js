@@ -1,6 +1,6 @@
 (function(){
 	
-	var module = angular.module('promise-button',['promise-button-templates']);
+	var module = angular.module('promise-react',['promise-react-templates']);
 
 	module.constant('STATES', {
         IDLE: 'idle',
@@ -13,7 +13,7 @@
 })();
 (function(){
 	
-	var module = angular.module('promise-button');
+	var module = angular.module('promise-react');
 
 	module.directive('promiseDefault', function(){
 		return {
@@ -28,7 +28,7 @@
 })();
 (function(){
 	
-	var module = angular.module('promise-button');
+	var module = angular.module('promise-react');
 
 	// thanks to Joscha and hilnius: http://stackoverflow.com/questions/20325480/angularjs-whats-the-best-practice-to-add-ngif-to-a-directive-programmatically
 	module.directive('whenProgress', ['ngIfDirective','STATES', function(ngIfDirective, STATES){
@@ -81,7 +81,7 @@
 })();
 (function(){
 	
-	var module = angular.module('promise-button');
+	var module = angular.module('promise-react');
 
 	// thanks to Joscha and hilnius: http://stackoverflow.com/questions/20325480/angularjs-whats-the-best-practice-to-add-ngif-to-a-directive-programmatically
 	module.directive('whenPromise', ['ngIfDirective','STATES', function(ngIfDirective, STATES){
@@ -134,7 +134,7 @@
 })();
 (function(){
 	
-	var module = angular.module('promise-button');
+	var module = angular.module('promise-react');
 
 	module.controller('PromiseButtonController', [
 		'$scope',
@@ -202,7 +202,7 @@
 })();
 (function(){
 	
-	var module = angular.module('promise-button');
+	var module = angular.module('promise-react');
 
 	module.directive('promiseButton', ['$parse', function($parse){
 		return {
@@ -220,7 +220,7 @@
 	}]);
 
 })();
-angular.module('promise-button-templates', ['directives/promise-default.tpl.html']);
+angular.module('promise-react-templates', ['directives/promise-default.tpl.html']);
 
 angular.module("directives/promise-default.tpl.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("directives/promise-default.tpl.html",

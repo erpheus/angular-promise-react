@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="demo">
 <head>
-	<title>Angular Promise Button Demo</title>
+	<title>Angular Promise React Demo</title>
 	<meta charset="utf-8"/> 
 
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script type="text/javascript" src="angular.js"></script>
-	<script type="text/javascript" src="angular-promise-button/angular-promise-button.js"></script>
+	<script type="text/javascript" src="angular-promise-react/angular-promise-react.js"></script>
 
 	<script type="text/javascript" src="https://angularjs.org/google-code-prettify/prettify.min.js">
 	</script>
@@ -69,7 +69,7 @@
 	<!-- Fork on github -->
 	<div class="github-fork-ribbon-wrapper right" >
         <div class="github-fork-ribbon">
-            <a href="https://github.com/erpheus/angular-promise-button">Fork me on GitHub</a>
+            <a href="https://github.com/erpheus/angular-promise-react">Fork me on GitHub</a>
         </div>
     </div>
 
@@ -77,9 +77,9 @@
 
     <div class="header">
     	<div class="container">
-    		<h1>Angular promise button</h1>
+    		<h1>Angular promise react</h1>
     		<p>
-    			An angular library for making buttons that show the state of their call live.
+    			An angular library for making promise spinners and buttons that show the state of their call live.
     		</p>
     		<button promise-button="try_me()" class="btn btn-lg btn-danger">
     			<span when-promise="idle">try me!</span>
@@ -91,27 +91,34 @@
     	</div>
     </div>
 
+    <div class="container">
+	    <div class="alert alert-warning" role="alert">
+	    	<strong>Warning!</strong>
+	    	This library is still in early development and has just changed its name to not interfere with existing libraries. Changes coming soon!!
+	    </div>
+	</div>
+
     <!-- Installation -->
 
     <div class="container">
     	<h1>Installation</h1>
-    	<p>angular-promise-button can be downloaded with bower:</p>
+    	<p>angular-promise-react can be downloaded with bower:</p>
     	<div class="well">
-    		<code>bower install angular-promise-button --save</code>
+    		<code>bower install angular-promise-react --save</code>
     	</div>
     	<p>or you can download the latest version from github:</p>
-    	<a href="https://github.com/erpheus/angular-promise-button/releases/latest" class="btn btn-success"><i class="fa fa-github"></i> Latest release</a>
+    	<a href="https://github.com/erpheus/angular-promise-react/releases/latest" class="btn btn-success"><i class="fa fa-github"></i> Latest release</a>
 
     	<hr>
 
-    	<p>Include angular-promise-button's script tag after angularjs' one</p>
+    	<p>Include angular-promise-react's script tag after angularjs' one</p>
     	<div class="well">
-    		<code>&lt;script type="text/javascript" src="angular-promise-button/angular-promise-button.js"&gt;&lt;/script&gt; </code>
+    		<code>&lt;script type="text/javascript" src="path/to/promise/react/angular-promise-react.min.js"&gt;&lt;/script&gt; </code>
     	</div>
 
-    	<p>Inject <code>promise-button</code> directive into your angular module:</p>
+    	<p>Inject <code>promise-react</code> directive into your angular module:</p>
     	<div class="well">
-    		<code>angular.module('myApp', ['promise-button'])</code>
+    		<code>angular.module('myApp', ['promise-react'])</code>
     	</div>
     </div>
 
@@ -229,7 +236,7 @@
 	      </div>
 	    </script>
 	    <script id="simple-real.js">
-	      angular.module('simple',['promise-button'])
+	      angular.module('simple',['promise-react'])
 	        .controller('SimpleController',['$scope', '$timeout',
 	          function($scope, $timeout){
 	            $scope.wait_3_seconds = function(){
@@ -262,7 +269,7 @@
 	      </div>
 	    </script>
 	    <script id="simple-customized-real.js">
-	      angular.module('simple-customized',['promise-button'])
+	      angular.module('simple-customized',['promise-react'])
 	        .controller('SimpleCustomController',['$scope', '$timeout',
 	          function($scope, $timeout){
 	            $scope.wait_3_seconds = function(){
@@ -317,7 +324,7 @@
 	      </div>
 	    </script>
 	    <script id="full-real.js">
-	      angular.module('full',['promise-button'])
+	      angular.module('full',['promise-react'])
 	        .controller('FullController',['$scope', '$timeout','$q',
 	          function($scope, $timeout, $q){
 	            $scope.download = function(){

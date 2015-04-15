@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('demo',['promise-button','angular-example','ui.bootstrap']);
+	var app = angular.module('demo',['promise-react','angular-example','ui.bootstrap']);
 
 	app.controller('DemoController',[
 		'$scope',

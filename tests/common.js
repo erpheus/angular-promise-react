@@ -8,14 +8,14 @@ var STATES = {
 
 
 function mockDirective(name, backups){
-	angular.module('promise-button').config(function($provide){
+	angular.module('promise-react').config(function($provide){
     	$provide.decorator(name+'Directive', ['$delegate', function($delegate) {
         	//$delegate is array of all {name} directive
         	backups[name] = $delegate.shift();
         	return $delegate;
     	}]);
 	});
-	angular.module('promise-button').directive(name, function() {
+	angular.module('promise-react').directive(name, function() {
 	    return {
 	        link: function() {}
 	    }
@@ -23,7 +23,7 @@ function mockDirective(name, backups){
 }
 
 function restoreDirective(name, backups){
-	angular.module('promise-button').config(function($provide){
+	angular.module('promise-react').config(function($provide){
     	$provide.decorator(name+'Directive', ['$delegate', function($delegate) {
         	//$delegate is array of all {name} directive
         	$delegate.pop();

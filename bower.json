@@ -1,12 +1,12 @@
 {
-  "name": "angular-promise-button",
-  "version": "0.7.0",
-  "homepage": "https://github.com/erpheus/angular-promise-button",
+  "name": "angular-promise-react",
+  "version": "0.8.0",
+  "homepage": "https://erpheus.github.io/angular-promise-react",
   "authors": [
     "Erpheus <erpheus@gmail.com>"
   ],
-  "description": "Angular button directive for deferred actions.",
-  "main": "dist/angular-promise-button.min.js",
+  "description": "Angular directives for displaying status of deferred actions.",
+  "main": "dist/angular-promise-react.min.js",
   "moduleType": [
     "es6"
   ],
@@ -15,6 +15,7 @@
     "button",
     "deferred",
     "promise",
+    "react",
     "status"
   ],
   "license": "Apache 2.0",

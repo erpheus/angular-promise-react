@@ -1,6 +1,6 @@
 (function(){
 	
-	var module = angular.module('promise-button',['promise-button-templates']);
+	var module = angular.module('promise-react',['promise-react-templates']);
 
 	module.constant('STATES', {
         IDLE: 'idle',

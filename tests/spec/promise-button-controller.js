@@ -1,6 +1,6 @@
 describe('Controller: PromiseButtonController', function () {
 
-	beforeEach(module('promise-button'));
+	beforeEach(module('promise-react'));
 
 	var buttonController,
 		scope,

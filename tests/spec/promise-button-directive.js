@@ -1,13 +1,13 @@
-describe('Directive: promise-button', function() {
+describe('Directive: promise-react', function() {
   var element,
   	  scope,
       startAction;
 
-  beforeEach(module('promise-button'));
+  beforeEach(module('promise-react'));
 
   beforeEach(function(){
     startAction = jasmine.createSpy('startAction');
-    module('promise-button', function($controllerProvider){
+    module('promise-react', function($controllerProvider){
       $controllerProvider.register('PromiseButtonController', function($scope){
         this.startAction = startAction;
       });

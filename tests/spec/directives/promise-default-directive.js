@@ -8,7 +8,7 @@ describe('Directive: promise-default', function() {
   beforeEach(function(){mockDirective.apply(this,['whenPromise', backups])});
   afterEach(function(){restoreDirective.apply(this,['whenPromise', backups])});
 
-  beforeEach(module('promise-button'));
+  beforeEach(module('promise-react'));
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();

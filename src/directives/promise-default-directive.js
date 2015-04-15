@@ -1,6 +1,6 @@
 (function(){
 	
-	var module = angular.module('promise-button');
+	var module = angular.module('promise-react');
 
 	module.directive('promiseDefault', function(){
 		return {

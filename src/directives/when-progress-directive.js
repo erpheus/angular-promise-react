@@ -1,6 +1,6 @@
 (function(){
 	
-	var module = angular.module('promise-button');
+	var module = angular.module('promise-react');
 
 	// thanks to Joscha and hilnius: http://stackoverflow.com/questions/20325480/angularjs-whats-the-best-practice-to-add-ngif-to-a-directive-programmatically
 	module.directive('whenProgress', ['ngIfDirective','STATES', function(ngIfDirective, STATES){

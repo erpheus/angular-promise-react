@@ -6,7 +6,7 @@ describe('Directive: when-progress', function() {
       parent,
       controller = {};
 
-  beforeEach(module('promise-button'));
+  beforeEach(module('promise-react'));
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();

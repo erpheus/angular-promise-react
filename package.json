@@ -1,28 +1,29 @@
 {
-  "name": "angular-promise-button",
-  "version": "0.7.0",
-  "description": "Angular button directive for deferred actions.",
-  "main": "dist/angular-promise-button.min.js",
+  "name": "angular-promise-react",
+  "version": "0.8.0",
+  "description": "Angular directives for displaying status of deferred actions.",
+  "main": "dist/angular-promise-react.min.js",
   "scripts": {
     "test": "grunt templates && karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/erpheus/angular-promise-button.git"
+    "url": "https://github.com/erpheus/angular-promise-react.git"
   },
   "keywords": [
     "angularjs",
     "button",
     "deferred",
     "promise",
+    "react",
     "status"
   ],
   "author": "Erpheus (Guillermo Guridi)",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/erpheus/angular-promise-button/issues"
+    "url": "https://github.com/erpheus/angular-promise-react/issues"
   },
-  "homepage": "https://github.com/erpheus/angular-promise-button",
+  "homepage": "https://erpheus.github.io/angular-promise-react",
   "devDependencies": {
     "bower": "^1.3.12",
     "grunt": "^0.4.5",

@@ -6,7 +6,7 @@ var config = {
 	dist: 'dist',
 	demo: 'demo',
 	tmp: 'tmp',
-	prefix: 'promise-button'
+	prefix: 'promise-react'
 }
 
 
@@ -96,7 +96,7 @@ module.exports = function (grunt) {
 		},
 		html2js: {
 			options: {
-				module: 'promise-button-templates',
+				module: 'promise-react-templates',
 				base: 'tmp'
 			},
 			tmp: {

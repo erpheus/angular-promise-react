@@ -5,7 +5,7 @@ describe('Directive: when-promise', function() {
       SAMPLECONTENT = "contentcontent",
       controller = {};
 
-  beforeEach(module('promise-button'));
+  beforeEach(module('promise-react'));
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();

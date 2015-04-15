@@ -6,10 +6,10 @@ module.exports = function(config) {
     files: [
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'src/promise-button.js',
+      'src/promise-react.js',
       'src/*.js',
       'src/**/*.js',
-      'tmp/promise-button-templates.js',
+      'tmp/promise-react-templates.js',
       'tests/common.js',
       'tests/spec/**/*.js'
     ],

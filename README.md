@@ -1,6 +1,6 @@
-# angular-promise-button
+# angular-promise-react
 
-[![Build Status](https://travis-ci.org/erpheus/angular-promise-button.svg?branch=master)](https://travis-ci.org/erpheus/angular-promise-button)
+[![Build Status](https://travis-ci.org/erpheus/angular-promise-react.svg?branch=master)](https://travis-ci.org/erpheus/angular-promise-react)
 
 Angular directive for buttons or links that trigger a deferred call and display status and outcome in the button itself.
 
@@ -10,26 +10,26 @@ Angular directive for buttons or links that trigger a deferred call and display 
 
 Install it via bower:
 
-	$ bower install angular-promise-button --save
+	$ bower install angular-promise-react --save
 
 
-or download the [minified source](https://github.com/erpheus/angular-promise-button/releases/latest) from github.
+or download the [minified source](https://github.com/erpheus/angular-promise-react/releases/latest) from github.
 
-Include angular-promise-button0s script tag after angularjs's one:
+Include angular-promise-react0s script tag after angularjs's one:
 
 ```html
-<script type="text/javascript" src="angular-promise-button/angular-promise-button.js"></script>
+<script type="text/javascript" src="angular-promise-react/angular-promise-react.js"></script>
 ```
 
-Inject `promise-button` directive into your angular module:
+Inject `promise-react` directive into your angular module:
 
 ```javascript
-angular.module('myApp', ['promise-button'])
+angular.module('myApp', ['promise-react'])
 ```
 
 ### Basic usage
 
-Full documentation and examples [in here](http://erpheus.github.io/angular-promise-button)
+Full documentation and examples [in here](http://erpheus.github.io/angular-promise-react)
 
 ```html
 <a promise-button="deferredAction()">
@@ -57,4 +57,4 @@ Full documentation and examples [in here](http://erpheus.github.io/angular-promi
 
 
 ## License
-Licensed under the terms of the [Apache license 2.0](https://github.com/erpheus/angular-promise-button/blob/master/LICENSE)
+Licensed under the terms of the [Apache license 2.0](https://github.com/erpheus/angular-promise-react/blob/master/LICENSE)

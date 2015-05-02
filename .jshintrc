@@ -1,0 +1,21 @@
+{
+	"strict": true,  // Require 'use strict'
+	"browser": true, // Browser environment
+	"jasmine": true, // Testing environment
+	"globals": {     // Extra globals (false makes it read-only)
+		"angular": true,
+		"require": true,
+		"module": true,
+		"inject": true
+	},
+
+	"quotmark": "single", // Strings must be in 'single quotes'.
+	"sub": true,          // Allow square bracket notation, ie. attr['promiseButton']
+
+	"eqeqeq": true, // Always use triple equals
+	"immed": true,  // Require parens around inmediate invocations
+
+	"unused": true,  // Warn about unused variables
+	"undef": true,   // Warn about undefined variables
+	"latedef": true  // Prohibit variable use before definition
+}

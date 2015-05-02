@@ -1,12 +1,15 @@
+/*globals STATES, mockDirective, restoreDirective */
 describe('Directive: promise-default', function() {
+  'use strict';
   var element,
-  	  scope,
-  	  SAMPLETEXT = 'transcluded text',
+      parent,
+      scope,
+      SAMPLETEXT = 'transcluded text',
       controller = {};
 
   var backups = {};
-  beforeEach(function(){mockDirective.apply(this,['whenPromise', backups])});
-  afterEach(function(){restoreDirective.apply(this,['whenPromise', backups])});
+  beforeEach(function(){mockDirective.apply(this,['whenPromise', backups]);});
+  afterEach(function(){restoreDirective.apply(this,['whenPromise', backups]);});
 
   beforeEach(module('promise-react'));
 
@@ -23,21 +26,19 @@ describe('Directive: promise-default', function() {
   }));
 
   var states_and_checks = [
-  	{ state: STATES.IDLE, check: SAMPLETEXT},
-  	{ state: STATES.LOADING, check : 'fa-spin' },
-  	{ state: STATES.INTERMEDIATE, check : 'fa-spin' },
-  	{ state: STATES.DONE, check: 'fa-check' },
-  	{ state: STATES.FAILED, check: 'fa-times' }
+    { state: STATES.IDLE, check: SAMPLETEXT},
+    { state: STATES.LOADING, check : 'fa-spin' },
+    { state: STATES.INTERMEDIATE, check : 'fa-spin' },
+    { state: STATES.DONE, check: 'fa-check' },
+    { state: STATES.FAILED, check: 'fa-times' }
   ];
 
-  for (var i = 0; i < states_and_checks.length; i++) {
-    var sc = states_and_checks[i];
-    it('should display '+sc.check+' on '+sc.state, function(sc){ return function(){
+  states_and_checks.forEach(function(sc) {
+    it('should display '+sc.check+' on '+sc.state, function() {
       controller.status = sc.state;
       scope.$digest();
 
       expect(element.html()).toMatch(sc.check);
-    }}(sc));
-  };
-
+    });
+  });
 });

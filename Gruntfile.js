@@ -1,5 +1,5 @@
 var pkgjson = require('./package.json');
- 
+
 var config = {
 	pkg: pkgjson,
 	src: 'src',
@@ -7,10 +7,11 @@ var config = {
 	demo: 'demo',
 	tmp: 'tmp',
 	prefix: 'promise-react'
-}
+};
 
 
 module.exports = function (grunt) {
+	'use strict';
 
 	grunt.initConfig({
 		config: config,
@@ -80,7 +81,7 @@ module.exports = function (grunt) {
 		concat: {
 			tmp: {
 				src: ['<%= config.tmp %>/<%= config.prefix %>.js','<%= config.tmp %>/**/*.js'],
-      			dest: '<%= config.tmp %>/<%= pkg.name %>.js'
+				dest: '<%= config.tmp %>/<%= pkg.name %>.js'
 			}
 		},
 

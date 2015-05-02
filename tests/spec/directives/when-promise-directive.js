@@ -1,8 +1,9 @@
+/*globals STATES */
 describe('Directive: when-promise', function() {
+  'use strict';
   var scope,
-      action,
-      startAction,
-      SAMPLECONTENT = "contentcontent",
+      parent,
+      SAMPLECONTENT = 'contentcontent',
       controller = {};
 
   beforeEach(module('promise-react'));

@@ -1,6 +1,7 @@
 describe('Directive: promise-react', function() {
+  'use strict';
   var element,
-  	  scope,
+      scope,
       startAction;
 
   beforeEach(module('promise-react'));
@@ -8,7 +9,7 @@ describe('Directive: promise-react', function() {
   beforeEach(function(){
     startAction = jasmine.createSpy('startAction');
     module('promise-react', function($controllerProvider){
-      $controllerProvider.register('PromiseButtonController', function($scope){
+      $controllerProvider.register('PromiseButtonController', function(){
         this.startAction = startAction;
       });
     });
@@ -17,7 +18,7 @@ describe('Directive: promise-react', function() {
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
-    scope.deferred = function(){}
+    scope.deferred = function(){};
 
     element = '<a promise-button="deferred"></a>';
 

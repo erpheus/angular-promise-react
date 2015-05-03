@@ -1,8 +1,7 @@
+/*globals STATES */
 describe('Directive: when-progress', function() {
+  'use strict';
   var scope,
-      trigger = '',
-      action,
-      startAction,
       parent,
       controller = {};
 

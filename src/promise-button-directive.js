@@ -1,5 +1,6 @@
 (function(){
-	
+	'use strict';
+
 	var module = angular.module('promise-react');
 
 	module.directive('promiseButton', ['$parse', function($parse){
@@ -12,7 +13,7 @@
 					ctrl.action = fn;
 					var trigger = attr['promiseTrigger'] || 'click';
 					element.bind(trigger, ctrl.startAction);
-				}
+				};
 			}
 		};
 	}]);

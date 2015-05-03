@@ -1,5 +1,6 @@
 (function(){
-	
+	'use strict';
+
 	var module = angular.module('promise-react');
 
 	module.directive('promiseDefault', function(){

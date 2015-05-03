@@ -1,5 +1,6 @@
 (function(){
-	
+	'use strict';
+
 	var module = angular.module('promise-react');
 
 	module.controller('PromiseButtonController', [
@@ -7,7 +8,7 @@
 		'STATES',
 		'$timeout',
 		function($scope, STATES, $timeout){
-			
+
 			var ctrl = this;
 			ctrl.action = null;
 			var controller = this;
@@ -34,34 +35,36 @@
 			setStatus(STATES.IDLE);
 
 			/* Called by the binding in the directive. Calls the action
-			 * specified and sets all the callbacks for handling the 
+			 * specified and sets all the callbacks for handling the
 			 * promise updates. */
 			ctrl.startAction = function(){
 				// Avoid duplicate calls
-				if ($scope.status != STATES.IDLE || !ctrl.action){
+				if ($scope.status !== STATES.IDLE || !ctrl.action){
 					return;
 				}
 				setStatus(STATES.LOADING);
 
 				/* Handler builder for the end of the promise */
-				var end = function(state) { return function(result){
-					setStatus(state, result);
+				var end = function(state) {
+					return function(result){
+						setStatus(state, result);
 
-					// Return to idle after timeout
-					$timeout(function(){
-						setStatus(STATES.IDLE);
-					},500);
-				}};
+						// Return to idle after timeout
+						$timeout(function(){
+							setStatus(STATES.IDLE);
+						},500);
+					};
+				};
 
 				var update = function(state){
 					setStatus(STATES.INTERMEDIATE, state);
-				}
+				};
 
 				//Button sometimes doesn't update.
 				$scope.$apply();
 
 				return ctrl.action($scope).then(end(STATES.DONE), end(STATES.FAILED), update);
-			}
+			};
 		}
 	]);
 

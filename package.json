@@ -4,7 +4,7 @@
   "description": "Angular directives for displaying status of deferred actions.",
   "main": "dist/angular-promise-react.min.js",
   "scripts": {
-    "test": "grunt templates && karma start --single-run --browsers PhantomJS"
+    "test": "grunt templates && ./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",

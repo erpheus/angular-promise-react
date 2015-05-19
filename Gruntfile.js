@@ -104,6 +104,13 @@ module.exports = function (grunt) {
 				src: ['<%= config.tmp %>/**/*.tpl.html'],
 				dest: '<%= config.tmp %>/<%= config.prefix %>-templates.js'
 			}
+		},
+
+		jshint: {
+			options: {
+				jshintrc: '.jshintrc'
+			},
+			all: ['Gruntfile.js', 'src/**/*.js', 'tests/**/*.js']
 		}
 	});
 
@@ -111,6 +118,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-html2js');
 
@@ -119,6 +127,7 @@ module.exports = function (grunt) {
 		'dist','demo'
 	]);
 	grunt.registerTask('dist', [
+		'jshint:all',
 		'clean:tmp',
 		'copy:tmp',
 		'html2js:tmp',

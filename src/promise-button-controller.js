@@ -60,9 +60,6 @@
 					setStatus(STATES.INTERMEDIATE, state);
 				};
 
-				//Button sometimes doesn't update.
-				$scope.$apply();
-
 				return ctrl.action($scope).then(end(STATES.DONE), end(STATES.FAILED), update);
 			};
 		}

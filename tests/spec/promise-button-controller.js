@@ -1,12 +1,14 @@
-/*globals STATES */
+/*globals injectStates, STATES */
 describe('Controller: PromiseButtonController', function () {
   'use strict';
-
-  beforeEach(module('promise-react'));
 
   var buttonController,
     scope,
     action;
+
+  beforeEach(module('promise-react'));
+
+  injectStates();
 
   beforeEach(inject(function ($controller, $rootScope) {
 
@@ -29,7 +31,7 @@ describe('Controller: PromiseButtonController', function () {
     expect(scope.status).toBe( STATES.IDLE );
   });
 
-  describe('$scope.startAction', function() {
+  describe('startAction', function() {
 
     var deferred;
 
@@ -134,6 +136,6 @@ describe('Controller: PromiseButtonController', function () {
     });
 
 
-  });
+  }); // end describe startAction
 
-});
+}); // end describe PromiseButtonController

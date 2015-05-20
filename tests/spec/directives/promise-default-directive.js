@@ -1,4 +1,4 @@
-/*globals STATES, mockDirective, restoreDirective */
+/*globals mockDirective, restoreDirective, injectStates, STATES */
 describe('Directive: promise-default', function() {
   'use strict';
   var element,
@@ -13,6 +13,8 @@ describe('Directive: promise-default', function() {
 
   beforeEach(module('promise-react'));
 
+  injectStates();
+
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
 
@@ -26,16 +28,16 @@ describe('Directive: promise-default', function() {
   }));
 
   var states_and_checks = [
-    { state: STATES.IDLE, check: SAMPLETEXT},
-    { state: STATES.LOADING, check : 'fa-spin' },
-    { state: STATES.INTERMEDIATE, check : 'fa-spin' },
-    { state: STATES.DONE, check: 'fa-check' },
-    { state: STATES.FAILED, check: 'fa-times' }
+    { state: 'IDLE', check: SAMPLETEXT},
+    { state: 'LOADING', check : 'fa-spin' },
+    { state: 'INTERMEDIATE', check : 'fa-spin' },
+    { state: 'DONE', check: 'fa-check' },
+    { state: 'FAILED', check: 'fa-times' }
   ];
 
   states_and_checks.forEach(function(sc) {
     it('should display '+sc.check+' on '+sc.state, function() {
-      controller.status = sc.state;
+      controller.status = STATES[sc.state];
       scope.$digest();
 
       expect(element.html()).toMatch(sc.check);

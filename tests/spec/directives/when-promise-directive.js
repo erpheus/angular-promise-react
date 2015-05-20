@@ -1,4 +1,4 @@
-/*globals STATES */
+/*globals injectStates, STATES */
 describe('Directive: when-promise', function() {
   'use strict';
   var scope,
@@ -7,6 +7,8 @@ describe('Directive: when-promise', function() {
       controller = {};
 
   beforeEach(module('promise-react'));
+
+  injectStates();
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();

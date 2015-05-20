@@ -1,4 +1,4 @@
-/*globals STATES */
+/*globals injectStates, STATES */
 describe('Directive: when-progress', function() {
   'use strict';
   var scope,
@@ -6,6 +6,8 @@ describe('Directive: when-progress', function() {
       controller = {};
 
   beforeEach(module('promise-react'));
+
+  injectStates();
 
   beforeEach(inject(function($rootScope, $compile) {
     scope = $rootScope.$new();
@@ -20,12 +22,12 @@ describe('Directive: when-progress', function() {
 
   }));
 
-  it ('should show its content when status is loading', function(){
+  it ('should show its content when status is loading', inject(function(STATES){
     controller.status = STATES.LOADING;
     scope.$digest();
 
     expect(parent.text()).toMatch('contentcontent');
-  });
+  }));
 
   it ('should show its content when status is intermediate', function(){
     controller.status = STATES.INTERMEDIATE;

@@ -1,12 +1,12 @@
 /*jshint unused: false, strict: false */
-var STATES = {
-  IDLE: 'idle',
-  LOADING: 'loading',
-  INTERMEDIATE: 'intermediate',
-  DONE: 'done',
-  FAILED: 'failed'
-};
 
+var STATES;
+
+function injectStates(){
+  beforeEach(inject(function ($injector) {
+    STATES = $injector.get('STATES');
+  }));
+}
 
 function mockDirective(name, backups){
   angular.module('promise-react').config(function($provide){

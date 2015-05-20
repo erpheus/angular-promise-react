@@ -54,7 +54,7 @@
 		});
 	}]);
 
-	// when-progress directive
+	// when-promise directive
 	module.directive('whenPromise', ['promiseButtonIf', 'STATES', function(promiseButtonIf, STATES) {
 		return promiseButtonIf(function(scope, iElement, iAttrs, promiseButtonController) {
 			var value = iAttrs.whenPromise;

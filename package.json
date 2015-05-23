@@ -34,9 +34,9 @@
     "grunt-contrib-uglify": "^0.8.0",
     "grunt-html2js": "^0.3.0",
     "jasmine-core": "^2.2.0",
-    "karma": "^0.12.31",
+    "karma": "0.12.31",
     "karma-coverage": "^0.2.7",
-    "karma-jasmine": "^0.2.2",
+    "karma-jasmine": "^0.3.4",
     "karma-jasmine-html-reporter": "^0.1.7",
     "karma-phantomjs-launcher": "^0.1.4"
   }

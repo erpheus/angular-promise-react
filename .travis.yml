@@ -6,4 +6,5 @@ before_script:
   - npm install -g karma-cli
   - npm install -g grunt-cli
 notifications:
-  email: false
+  email: erpheus@gmail.com
+  on_failure: change
